@@ -6,6 +6,7 @@ class ClientCommunication:
         self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server_ip = '192.168.1.41'
         self.server_port = 12345
+        self.ttl = 60
 
     def connect_to_server(self):
         self.client_socket.connect((self.server_ip, self.server_port))

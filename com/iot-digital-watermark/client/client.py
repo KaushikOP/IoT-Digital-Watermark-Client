@@ -2,6 +2,7 @@
 
 import sys
 import os
+import time
 
 # Add the root of the project (iot-digital-watermark) to the system path
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -18,6 +19,8 @@ class WatermarkClient:
         self.communication = ClientCommunication()
         self.file_handler = FileHandler()
         self.embedding = WatermarkEmbedding()
+        self.ttl = 60
+        self.last_activity_time = time.time()
 
     def start(self):
         print("Starting Watermark Client...")
@@ -25,13 +28,17 @@ class WatermarkClient:
 
         try:
             while True:
-                # Optionally receive data from the server
+                # Check if the TTL has expired (client idle for too long)
+                if time.time() - self.last_activity_time > self.ttl:
+                    print("Client has been idle for too long. Disconnecting...")
+                    break  # Disconnect if TTL has expired
+                
+                # Receive data from the server
                 self.receive_data_from_server()
 
                 # Send data to the server
                 self.send_data_to_server()
 
-            
         except KeyboardInterrupt:
             print("\nClient stopped by user.")
         finally:
