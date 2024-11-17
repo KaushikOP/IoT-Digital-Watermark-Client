@@ -19,8 +19,6 @@ class WatermarkClient:
         self.communication = ClientCommunication()
         self.file_handler = FileHandler()
         self.embedding = WatermarkEmbedding()
-        self.ttl = 60
-        self.last_activity_time = time.time()
 
     def start(self):
         print("Starting Watermark Client...")
@@ -28,11 +26,6 @@ class WatermarkClient:
 
         try:
             while True:
-                # Check if the TTL has expired (client idle for too long)
-                if time.time() - self.last_activity_time > self.ttl:
-                    print("Client has been idle for too long. Disconnecting...")
-                    break  # Disconnect if TTL has expired
-                
                 # Receive data from the server
                 self.receive_data_from_server()
 
