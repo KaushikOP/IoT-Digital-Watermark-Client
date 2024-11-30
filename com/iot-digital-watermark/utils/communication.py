@@ -11,6 +11,7 @@ class ClientCommunication:
     def connect_to_server(self):
         self.client_socket.connect((self.server_ip, self.server_port))
         print(f"Connected to server at {self.server_ip}:{self.server_port}")
+        return self.client_socket
 
     def send_data(self, client_socket, data):
         # Logic to send file to the client

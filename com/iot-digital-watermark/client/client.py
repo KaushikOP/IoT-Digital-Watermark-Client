@@ -22,11 +22,11 @@ class WatermarkClient:
 
     def start(self):
         print("Starting Watermark Client...")
-        self.communication.connect_to_server()
+        client_socket = self.communication.connect_to_server()
 
         try:
             while True:
-                command = self.receive_data_from_server()
+                command = self.receive_data_from_server(client_socket)
                 if not command:
                     break  # Connection closed by server
 
