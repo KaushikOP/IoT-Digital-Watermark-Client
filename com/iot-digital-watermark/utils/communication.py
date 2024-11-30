@@ -30,19 +30,19 @@ class ClientCommunication:
 
     def receive_data(self, client_socket):
         # Logic to send file to the client
-        print(f"Sending file {data} to client...")
         data = client_socket.recv(1024).decode()
+        print(f"Received data {data} from server...")
         return data
 
     def receive_file(self, client_socket, file):
-        print("Sending media")
-        try:
-            for chunk in file:
-                client_socket.send(chunk)
+        print("Receiving media")
+        # try:
+        #     # for chunk in file:
+        #     #     client_socket.send(chunk)
                  
-            print("file sent successfully")
-        except Exception as e:
-            print(f"Error sending file: {e}")
+        #     # print("file sent successfully")
+        # except Exception as e:
+        #     print(f"Error sending file: {e}")
 
     def close_client(self):
         self.client_socket.close()
