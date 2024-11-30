@@ -26,24 +26,54 @@ class WatermarkClient:
 
         try:
             while True:
-                # Receive data from the server
-                self.receive_data_from_server()
+                command = self.receive_data_from_server()
+                if not command:
+                    break  # Connection closed by server
 
-                # Send data to the server
-                self.send_data_to_server()
+                print(f"Command received from server: {command}")
+
+                if command == "close_connection":
+                    print("Closing connection as requested by server.")
+                    break
+                else:
+                    self.execute_command(command)
 
         except KeyboardInterrupt:
             print("\nClient stopped by user.")
         finally:
             self.communication.close_client()
 
-    def send_data_to_server(self):
-        self.communication.client_socket.send(b"Hello")
+    def send_data_to_server(self, client_socket, data=None):
+        self.communication.send_data(client_socket, data)
         # file_path = self.file_handler.get_host_media()
         # watermarked_file_path = self.embedding.embed_watermark(file_path)
         # self.communication.send_file(watermarked_file_path)
 
-    def receive_data_from_server(self):
+    def send_media_to_server(self, client_socket, file):
+        file_size,file = self.file_handler.load_media(file)
+        self.communication.send_data(file_size)
+        
+        ack = self.communication.receive_data()
+        if ack != "ACK":
+            print("Acknowledgment not received. Terminating transfer.")
+            ack=None
+            exit
+        self.communication.send_file(client_socket, file)
+        ack = self.communication.receive_data()
+        if ack != "ACK":
+            print("Acknowledgment not received. Terminating transfer.")
+            ack=None
+            exit
+        # file_path = self.file_handler.get_host_media()
+        # watermarked_file_path = self.embedding.embed_watermark(file_path)
+        # self.communication.send_file(watermarked_file_path)
+
+    def receive_data_from_server(self, client_socket):
+        #received_file_path = self.communication.receive_file()
+        data = self.communication.receive_data(client_socket)
+        return data
+
+    def receive_media_from_server(self):
         #received_file_path = self.communication.receive_file()
         received_file_path = self.communication.client_socket.recv(1024).decode()
         if received_file_path:
