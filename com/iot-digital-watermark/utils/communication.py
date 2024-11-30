@@ -4,7 +4,7 @@ import socket
 class ClientCommunication:
     def __init__(self):
         self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.server_ip = '192.168.1.41'
+        self.server_ip = '192.168.137.1'
         self.server_port = 12345
         self.ttl = 60
 
