@@ -32,6 +32,17 @@ class WatermarkClient:
 
                 print(f"Command received from server: {command}")
 
+                if command in ["c1","c2","c3"]:
+                    if command == "c1":
+                        print("Getting a new Host media")
+                        file_size = self.receive_data_from_server(client_socket)
+                        if file_size is not None:
+                            self.send_data_to_server(client_socket,"ACK")
+
+                    if command == "c2":
+                        print("Getting a new watermark")
+                    if command == "c3":
+                        print("Performing Watermark Embedding")
                 if command == "close_connection":
                     print("Closing connection as requested by server.")
                     break
