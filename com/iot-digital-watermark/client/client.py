@@ -35,8 +35,8 @@ class WatermarkClient:
                 if command == "close_connection":
                     print("Closing connection as requested by server.")
                     break
-                else:
-                    self.execute_command(command)
+                # else:
+                #     #self.execute_command(command)
 
         except KeyboardInterrupt:
             print("\nClient stopped by user.")
