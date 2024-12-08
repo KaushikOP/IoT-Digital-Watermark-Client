@@ -15,7 +15,7 @@ class ClientCommunication:
 
     def send_data(self, client_socket, data):
         # Logic to send file to the client
-        print(f"Sending file {data} to client...")
+        print(f"Sending {data} to client...")
         client_socket.send(f"{data}".encode()) 
 
     def send_file(self, client_socket, file):

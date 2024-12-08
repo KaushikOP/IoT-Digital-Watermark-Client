@@ -47,7 +47,7 @@ class FileHandler:
             
             return True
         except Exception as e:
-            print(f"Error saving media: {e}")
+            print(f"Error saving media: {e.with_traceback()}")
             return False
 
 
