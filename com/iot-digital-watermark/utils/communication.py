@@ -40,7 +40,7 @@ class ClientCommunication:
         received_size = 0
         
         while received_size < file_size:
-            chunk = client_socket.recv(self.buffer_size)
+            chunk = client_socket.recv(1024)
             if not chunk:
                 break
             file_chunks.append(chunk)
