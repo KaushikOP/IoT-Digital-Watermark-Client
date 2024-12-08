@@ -37,7 +37,7 @@ class WatermarkClient:
                     if command == "c1":
                         print("Getting a new Host media")
                         file = self.receive_data_from_server(client_socket)
-                        file_size = self.receive_data_from_server(client_socket)
+                        file_size = int(self.receive_data_from_server(client_socket))
                         print(file_size)
                         if file_size is not None:
                             self.send_data_to_server(client_socket,"ACK")
