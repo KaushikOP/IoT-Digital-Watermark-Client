@@ -41,7 +41,7 @@ class WatermarkClient:
                         print(file_size)
                         if file_size is not None:
                             self.send_data_to_server(client_socket,"ACK")
-                        file_chunks =  self.file_handler.receive_file(client_socket,file_size)
+                        file_chunks =  self.communication.receive_file(client_socket,file_size)
                         if file_chunks is not None:
                             self.send_data_to_server(client_socket,"ACK")
                         self.file_handler.save_media(file_chunks, constants.HOST_MEDIA_DIR + file)

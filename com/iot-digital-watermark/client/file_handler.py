@@ -2,14 +2,13 @@
 import os
 
 class FileHandler:
-    def receive_file(self, client_socket):
-        file_name = 'data/received_file'
-        with open(file_name, 'wb') as file:
-            while True:
-                data = client_socket.recv(1024)
-                if not data:
-                    break
-                file.write(data)
+    def receive_file(self, client_socket,file_size):
+        recv_file_size = 0
+        file_chunks = []
+        while recv_file_size < file_size:
+            data = client_socket.recv(1024)
+            if not data:
+                 break
         return file_name
 
     def process_and_store(self, dir_name):
