@@ -13,6 +13,7 @@ sys.path.append(parent_dir)
 from utils.communication import ClientCommunication
 from file_handler import FileHandler
 from watermark.embedding import WatermarkEmbedding
+from utils import constants
 
 class WatermarkClient:
     def __init__(self):
@@ -35,9 +36,16 @@ class WatermarkClient:
                 if command in ["c1","c2","c3"]:
                     if command == "c1":
                         print("Getting a new Host media")
+                        file = self.receive_data_from_server(client_socket)
+                        print(file)
+                        exit()
                         file_size = self.receive_data_from_server(client_socket)
                         if file_size is not None:
                             self.send_data_to_server(client_socket,"ACK")
+                        file_chunks =  self.file_handler.receive_file(client_socket,file_size)
+                        if file_chunks is not None:
+                            self.send_data_to_server(client_socket,"ACK")
+                        self.file_handler.save_media(file_chunks, constants.HOST_MEDIA_DIR)
 
                     if command == "c2":
                         print("Getting a new watermark")
@@ -84,11 +92,9 @@ class WatermarkClient:
         data = self.communication.receive_data(client_socket)
         return data
 
-    def receive_media_from_server(self):
+    def receive_media_from_server(self, client_socket, file_size):
         #received_file_path = self.communication.receive_file()
-        received_file_path = self.communication.client_socket.recv(1024).decode()
-        if received_file_path:
-            print(f"Received file from server: {received_file_path}")
+        
 
 if __name__ == "__main__":
     client = WatermarkClient()

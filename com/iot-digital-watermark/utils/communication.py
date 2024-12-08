@@ -34,15 +34,21 @@ class ClientCommunication:
         print(f"Received data {data} from server...")
         return data
 
-    def receive_file(self, client_socket, file):
+    def receive_file(self, client_socket, file_size):
         print("Receiving media")
-        # try:
-        #     # for chunk in file:
-        #     #     client_socket.send(chunk)
-                 
-        #     # print("file sent successfully")
-        # except Exception as e:
-        #     print(f"Error sending file: {e}")
-
+        file_chunks = []
+        received_size = 0
+        
+        while received_size < file_size:
+            chunk = client_socket.recv(self.buffer_size)
+            if not chunk:
+                break
+            file_chunks.append(chunk)
+            received_size += len(chunk)
+            print(f"Received {received_size}/{file_size} bytes")
+        
+        print("File received successfully")
+        return file_chunks
+        
     def close_client(self):
         self.client_socket.close()
