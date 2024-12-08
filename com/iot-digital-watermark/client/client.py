@@ -94,8 +94,8 @@ class WatermarkClient:
 
     def receive_media_from_server(self, client_socket, file_size):
         #received_file_path = self.communication.receive_file()
+        print("Receiving Media")
         
-
 if __name__ == "__main__":
     client = WatermarkClient()
     client.start()
