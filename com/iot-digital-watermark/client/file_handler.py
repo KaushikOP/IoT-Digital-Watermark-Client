@@ -1,5 +1,6 @@
 # client/file_handler.py
 import os
+import traceback
 
 class FileHandler:
 
@@ -26,7 +27,7 @@ class FileHandler:
         finally:
             file.close()
 
-    def save_media(self, file, file_path):
+    def save_media(self, file_chunks, file_path):
         try:
             # Ensure the directory exists
             os.makedirs(os.path.dirname(file_path), exist_ok=True)
@@ -34,20 +35,16 @@ class FileHandler:
             # Save chunks to the destination file
             with open(file_path, "wb") as file:
                 total_written = 0
-                for chunk in file:
+                for chunk in file_chunks:
                     file.write(chunk)
                     total_written += len(chunk)
                 
                 print(f"\nFile successfully saved to {file_path}.")
             
-            # # Verify if the total written size matches the expected file size
-            # if total_written != file_size:
-            #     print("Warning: File size mismatch! File may be incomplete.")
-            #     return False
-            
             return True
         except Exception as e:
-            print(f"Error saving media: {e.with_traceback()}")
+            print(f"Error saving media: {str(e)}")
+            print(traceback.format_exc())  # Prints the full traceback for debugging
             return False
 
 
