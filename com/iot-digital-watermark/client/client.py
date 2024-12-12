@@ -48,6 +48,16 @@ class WatermarkClient:
 
                     if command == "c2":
                         print("Getting a new watermark")
+                        file = self.receive_data_from_server(client_socket)
+                        file_size = int(self.receive_data_from_server(client_socket))
+                        print(file_size)
+                        if file_size is not None:
+                            self.send_data_to_server(client_socket,"ACK")
+                        file_chunks =  self.communication.receive_file(client_socket,file_size)
+                        if file_chunks is not None:
+                            self.send_data_to_server(client_socket,"ACK")
+                        self.file_handler.save_media(file_chunks, constants.WATERMARK_DIR + file)
+                        
                     if command == "c3":
                         print("Performing Watermark Embedding")
                 if command == "close_connection":
