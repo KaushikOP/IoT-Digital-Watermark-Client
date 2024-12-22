@@ -48,6 +48,7 @@ class WatermarkClient:
                         if file_chunks is not None:
                             self.send_data_to_server(client_socket,"ACK")
                         self.file_handler.save_media(file_chunks, constants.HOST_MEDIA_DIR + file)
+                        host_media = file
 
                     if command == "c2":
                         print("Getting a new watermark")
@@ -60,18 +61,24 @@ class WatermarkClient:
                         if file_chunks is not None:
                             self.send_data_to_server(client_socket,"ACK")
                         self.file_handler.save_media(file_chunks, constants.WATERMARK_DIR + file)
+                        watermark = file
 
                     if command == "c3":
+                        avail_host_media = FileHandler.read_files_from_directory(constants.HOST_MEDIA_DIR)
+                        avail_watermark = FileHandler.read_files_from_directory(constants.WATERMARK_DIR)
+                        if(host_media is ""):
+                            host_media = avail_host_media[0]
+                        if(watermark is ""):
+                            watermark = avail_watermark[0]
                         print("Performing Watermark Embedding using " + host_media + " and " + watermark)
                         if(input("Press n to change... $..: ") in ['n','N']):
                             print(" Selecting a new file...")
                             try:
-                                avail_host_media = FileHandler.read_files_from_directory(constants.HOST_MEDIA_DIR)
                                 print(' '.join(f'{i:03} {item}' for i, item in enumerate(avail_host_media)))
                                 tmp=int(input("Please input the number of media to be used...$..: "))
                                 if(tmp <= len(avail_host_media)):
                                     host_media = avail_host_media[tmp-1]
-                                avail_watermark = FileHandler.read_files_from_directory(constants.WATERMARK_DIR)
+                                
                                 print(' '.join(f'{i:03} {item}' for i, item in enumerate(avail_watermark)))
                                 tmp=int(input("Please input the media number to be used...$..: "))
                                 if(tmp <= len(avail_watermark)):
