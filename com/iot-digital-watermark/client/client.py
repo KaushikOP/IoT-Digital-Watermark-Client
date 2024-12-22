@@ -12,7 +12,7 @@ sys.path.append(parent_dir)
 
 from utils.communication import ClientCommunication
 from file_handler import FileHandler
-from watermark.embedding import WatermarkEmbedding
+from watermarking.embedding import WatermarkEmbedding
 from utils import constants
 
 class WatermarkClient:
@@ -22,6 +22,7 @@ class WatermarkClient:
         self.embedding = WatermarkEmbedding()
         self.host_media = ''
         self.watermark = ''
+        self.watermarked_media = ''
 
     def start(self):
         print("Starting Watermark Client...")
@@ -84,6 +85,13 @@ class WatermarkClient:
                                 tmp=int(input("Please input the media number to be used...$..: "))
                                 if(tmp <= len(avail_watermark)):
                                     self.watermark = avail_watermark[tmp]
+
+                                self.watermarked_media = WatermarkEmbedding.embedding(self.host_media, self.watermark)
+
+                                self.send_data_to_server(client_socket, self.watermarked_media)
+                                print("Sending file to server\n")
+                                file = constants.WATERMARKED_MEDIA_DIR + self.watermarked_media
+                                self.send_media_to_server(client_socket, file)
 
                             except Exception:
                                 print(Exception.with_traceback())
