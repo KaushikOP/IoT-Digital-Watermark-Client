@@ -29,6 +29,7 @@ class WatermarkClient:
 
         try:
             while True:
+                print("\n\nWaiting for server...\n")
                 command = self.receive_data_from_server(client_socket)
                 if not command:
                     break  # Connection closed by server
@@ -82,13 +83,12 @@ class WatermarkClient:
                                 print(' '.join(f'{i} {item}' for i, item in enumerate(avail_watermark)))
                                 tmp=int(input("Please input the media number to be used...$..: "))
                                 if(tmp <= len(avail_watermark)):
-                                    self.watermark = avail_host_media[tmp]
+                                    self.watermark = avail_watermark[tmp]
 
                             except Exception:
                                 print(Exception.with_traceback())
 
                         print("Now using host media as " + self.host_media + " and watermark as " + self.watermark)
-                        
 
                 if command == "close_connection":
                     print("Closing connection as requested by server.")
