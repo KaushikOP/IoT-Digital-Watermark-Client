@@ -66,10 +66,11 @@ class WatermarkClient:
                     if command == "c3":
                         avail_host_media = FileHandler.read_files_from_directory(constants.HOST_MEDIA_DIR)
                         avail_watermark = FileHandler.read_files_from_directory(constants.WATERMARK_DIR)
-                        if(host_media is ""):
+                        if(host_media == ""):
                             host_media = avail_host_media[0]
-                        if(watermark is ""):
+                        if(watermark == ""):
                             watermark = avail_watermark[0]
+                        
                         print("Performing Watermark Embedding using " + host_media + " and " + watermark)
                         if(input("Press n to change... $..: ") in ['n','N']):
                             print(" Selecting a new file...")
