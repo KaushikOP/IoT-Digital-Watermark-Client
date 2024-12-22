@@ -15,14 +15,13 @@ from file_handler import FileHandler
 from watermark.embedding import WatermarkEmbedding
 from utils import constants
 
-host_media = ''
-watermark = ''
-
 class WatermarkClient:
     def __init__(self):
         self.communication = ClientCommunication()
         self.file_handler = FileHandler()
         self.embedding = WatermarkEmbedding()
+        host_media = ''
+        watermark = ''
 
     def start(self):
         print("Starting Watermark Client...")
@@ -48,7 +47,7 @@ class WatermarkClient:
                         if file_chunks is not None:
                             self.send_data_to_server(client_socket,"ACK")
                         self.file_handler.save_media(file_chunks, constants.HOST_MEDIA_DIR + file)
-                        host_media = file
+                        self.host_media = file
 
                     if command == "c2":
                         print("Getting a new watermark")
@@ -61,15 +60,15 @@ class WatermarkClient:
                         if file_chunks is not None:
                             self.send_data_to_server(client_socket,"ACK")
                         self.file_handler.save_media(file_chunks, constants.WATERMARK_DIR + file)
-                        watermark = file
+                        self.watermark = file
 
                     if command == "c3":
                         avail_host_media = FileHandler.read_files_from_directory(constants.HOST_MEDIA_DIR)
                         avail_watermark = FileHandler.read_files_from_directory(constants.WATERMARK_DIR)
-                        if(host_media == ""):
-                            host_media = avail_host_media[0]
-                        if(watermark == ""):
-                            watermark = avail_watermark[0]
+                        if(self.host_media == ""):
+                            self.host_media = avail_host_media[0]
+                        if(self.watermark == ""):
+                            self.watermark = avail_watermark[0]
                         
                         print("Performing Watermark Embedding using " + host_media + " and " + watermark)
                         if(input("Press n to change... $..: ") in ['n','N']):
@@ -86,13 +85,6 @@ class WatermarkClient:
                                     watermark = avail_host_media[tmp-1]
                             except Exception:
                                 print(Exception.with_traceback())
-
-
-
-
-                        
-
-                        
 
                 if command == "close_connection":
                     print("Closing connection as requested by server.")
