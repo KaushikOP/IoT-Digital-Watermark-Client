@@ -20,8 +20,8 @@ class WatermarkClient:
         self.communication = ClientCommunication()
         self.file_handler = FileHandler()
         self.embedding = WatermarkEmbedding()
-        host_media = ''
-        watermark = ''
+        self.host_media = ''
+        self.watermark = ''
 
     def start(self):
         print("Starting Watermark Client...")
