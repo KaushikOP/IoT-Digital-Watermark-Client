@@ -70,21 +70,25 @@ class WatermarkClient:
                         if(self.watermark == ""):
                             self.watermark = avail_watermark[0]
                         
-                        print("Performing Watermark Embedding using " + self.host_media + " and " + self.watermark)
+                        print("Performing Watermark Embedding using host media as " + self.host_media + " and watermark as " + self.watermark)
                         if(input("Press n to change... $..: ") in ['n','N']):
                             print(" Selecting a new file...")
                             try:
-                                print(' '.join(f'{i:03} {item}' for i, item in enumerate(avail_host_media)))
+                                print(' '.join(f'{i} {item}' for i, item in enumerate(avail_host_media)))
                                 tmp=int(input("Please input the number of media to be used...$..: "))
                                 if(tmp <= len(avail_host_media)):
-                                    self.host_media = avail_host_media[tmp-1]
+                                    self.host_media = avail_host_media[tmp]
                                 
-                                print(' '.join(f'{i:03} {item}' for i, item in enumerate(avail_watermark)))
+                                print(' '.join(f'{i} {item}' for i, item in enumerate(avail_watermark)))
                                 tmp=int(input("Please input the media number to be used...$..: "))
                                 if(tmp <= len(avail_watermark)):
-                                    self.watermark = avail_host_media[tmp-1]
+                                    self.watermark = avail_host_media[tmp]
+
                             except Exception:
                                 print(Exception.with_traceback())
+
+                        print("Now using host media as " + self.host_media + " and watermark as " + self.watermark)
+                        
 
                 if command == "close_connection":
                     print("Closing connection as requested by server.")
