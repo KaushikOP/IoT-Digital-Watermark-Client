@@ -86,15 +86,15 @@ class WatermarkClient:
                                 if(tmp <= len(avail_watermark)):
                                     self.watermark = avail_watermark[tmp]
 
-                                self.watermarked_media = WatermarkEmbedding.embedding(self.host_media, self.watermark)
-
-                                self.send_data_to_server(client_socket, self.watermarked_media)
-                                print("Sending file to server\n")
-                                file = constants.WATERMARKED_MEDIA_DIR + self.watermarked_media
-                                self.send_media_to_server(client_socket, file)
-
                             except Exception:
                                 print(Exception.with_traceback())
+                        
+                        self.watermarked_media = WatermarkEmbedding.embedding(self.host_media, self.watermark)
+
+                        self.send_data_to_server(client_socket, self.watermarked_media)
+                        print("Sending file to server\n")
+                        file = constants.WATERMARKED_MEDIA_DIR + self.watermarked_media
+                        self.send_media_to_server(client_socket, file)
 
                         print("Now using host media as " + self.host_media + " and watermark as " + self.watermark)
 
