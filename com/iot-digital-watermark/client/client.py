@@ -122,13 +122,13 @@ class WatermarkClient:
         file_size,file = self.file_handler.load_media(file)
         self.communication.send_data(client_socket, file_size)
         
-        ack = self.communication.receive_data()
+        ack = self.communication.receive_data(client_socket)
         if ack != "ACK":
             print("Acknowledgment not received. Terminating transfer.")
             ack=None
             exit
         self.communication.send_file(client_socket, file)
-        ack = self.communication.receive_data()
+        ack = self.communication.receive_data(client_socket)
         if ack != "ACK":
             print("Acknowledgment not received. Terminating transfer.")
             ack=None
