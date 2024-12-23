@@ -60,7 +60,7 @@ class WatermarkEmbedding:
         # Crop to the required size
         watermark_replicated = watermark_replicated[:h, :w]
         
-        self.save_image(watermark_replicated, 'replicated_watermark-1.jpg')
+        #self.save_image(watermark_replicated, 'replicated_watermark-1.jpg')
         
         # If h or w are smaller than the watermark size, replicate to fill the remaining area
         if watermark_replicated.shape[0] < h or watermark_replicated.shape[1] < w:
@@ -69,7 +69,7 @@ class WatermarkEmbedding:
                                             (0, max(0, w - watermark_replicated.shape[1]))),
                                         mode='constant', constant_values=0)
         
-        self.save_image(watermark_replicated, 'D:\Kaushik\Research work\digital_signature\\' + 'replicated_watermark-2.jpg')
+        #self.save_image(watermark_replicated, 'D:\Kaushik\Research work\digital_signature\\' + 'replicated_watermark-2.jpg')
         
         # Ensure the replicated watermark matches the coefficient size
         watermark_replicated = watermark_replicated[:h, :w]
