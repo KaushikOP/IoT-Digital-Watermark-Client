@@ -78,8 +78,8 @@ class WatermarkEmbedding:
                 else:
                     LL_watermarked[i, j] = self.alpha * np.round(coeff[i, j] / self.alpha) + self.alpha / 2
 
-        
-        return coeff + alpha * watermark_replicated
+        return LL_watermarked
+        #return coeff + alpha * watermark_replicated
 
     def embedding(self, host_media_file, watermark_file):
         """Embed watermark into each channel of the original image."""
