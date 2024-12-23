@@ -30,7 +30,7 @@ class ClientCommunication:
 
     def receive_data(self, client_socket):
         # Logic to send file to the client
-        data = client_socket.recv(1024).decode()
+        data = client_socket.recv(4096 ).decode()
         print(f"Received data {data} from server...")
         return data
 
@@ -40,7 +40,7 @@ class ClientCommunication:
         received_size = 0
         
         while received_size < file_size:
-            chunk = client_socket.recv(1024)
+            chunk = client_socket.recv(4096)
             if not chunk:
                 break
             file_chunks.append(chunk)

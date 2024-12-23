@@ -18,7 +18,7 @@ class FileHandler:
             media_to_send = []
             # Send file data in chunks
             with open(file_path, "rb") as file:
-                while chunk := file.read(1024):
+                while chunk := file.read(4096):
                     media_to_send.append(chunk)
             
             return file_size,media_to_send
