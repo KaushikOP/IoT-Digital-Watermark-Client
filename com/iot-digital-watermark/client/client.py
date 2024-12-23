@@ -120,8 +120,7 @@ class WatermarkClient:
 
     def send_media_to_server(self, client_socket, file):
         file_size,file = self.file_handler.load_media(file)
-        print("file size" + str(file_size))
-        self.communication.send_data(file_size)
+        self.communication.send_data(client_socket, file_size)
         
         ack = self.communication.receive_data()
         if ack != "ACK":
