@@ -90,6 +90,9 @@ class WatermarkClient:
                                 print(Exception.with_traceback())
                         
                         self.watermarked_media = WatermarkEmbedding.embedding(self.embedding, self.host_media, self.watermark)
+                        if self.watermarked_media == '':
+                            print("Embedding failed")
+                            continue
 
                         self.send_data_to_server(client_socket, self.watermarked_media)
                         print("Sending file to server\n")
