@@ -89,7 +89,7 @@ class WatermarkClient:
                             except Exception:
                                 print(Exception.with_traceback())
                         
-                        self.watermarked_media = WatermarkEmbedding.embedding(self, self.host_media, self.watermark)
+                        self.watermarked_media = WatermarkEmbedding.embedding(self.embedding, self.host_media, self.watermark)
 
                         self.send_data_to_server(client_socket, self.watermarked_media)
                         print("Sending file to server\n")
