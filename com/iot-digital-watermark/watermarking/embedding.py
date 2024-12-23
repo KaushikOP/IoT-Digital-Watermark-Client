@@ -74,9 +74,9 @@ class WatermarkEmbedding:
             for j in range(w):
                 bit = watermark_replicated[i, j]
                 if bit == 0:
-                    LL_watermarked[i, j] = self.alpha * np.round(coeff[i, j] / self.alpha)
+                    LL_watermarked[i, j] = alpha * np.round(coeff[i, j] / alpha)
                 else:
-                    LL_watermarked[i, j] = self.alpha * np.round(coeff[i, j] / self.alpha) + self.alpha / 2
+                    LL_watermarked[i, j] = alpha * np.round(coeff[i, j] / alpha) + alpha / 2
 
         return LL_watermarked
         #return coeff + alpha * watermark_replicated
