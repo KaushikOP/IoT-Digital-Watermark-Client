@@ -81,15 +81,18 @@ class WatermarkEmbedding:
         """Embed watermark into each channel of the original image."""
 
         # Load images
+        print("Loading the media file " + host_media_file + " and watermark " + watermark_file)
         host_media = self.load_image(constants.HOST_MEDIA_DIR + host_media_file)
         watermark = self.load_image(constants.WATERMARK_DIR + watermark_file)
 
         #Split media into RGB channels
+        print("Spliting the files into RGB channels")
         original_channels = cv2.split(host_media)
         watermark_channels = cv2.split(watermark)
 
         watermarked_channels = []
         for i in range(3):  # Assuming RGB channels
+            print("Processing Channel " + i+1)
             coeffs = self.fwt2(original_channels[i])
             LL, _ = coeffs[0], coeffs[1]
             LL_wm = self.qim_embed(LL, watermark_channels[i])
