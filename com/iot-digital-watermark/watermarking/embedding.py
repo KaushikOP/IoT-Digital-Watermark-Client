@@ -69,6 +69,15 @@ class WatermarkEmbedding:
         
         # Ensure the replicated watermark matches the coefficient size
         watermark_replicated = watermark_replicated[:h, :w]
+        LL_watermarked = np.copy(coeff)
+        for i in range(h):
+            for j in range(w):
+                bit = watermark_replicated[i, j]
+                if bit == 0:
+                    LL_watermarked[i, j] = self.alpha * np.round(coeff[i, j] / self.alpha)
+                else:
+                    LL_watermarked[i, j] = self.alpha * np.round(coeff[i, j] / self.alpha) + self.alpha / 2
+
         
         return coeff + alpha * watermark_replicated
 
