@@ -92,7 +92,7 @@ class WatermarkEmbedding:
 
         watermarked_channels = []
         for i in range(3):  # Assuming RGB channels
-            print("Processing Channel " + i+1)
+            print("Processing Channels")
             coeffs = self.fwt2(original_channels[i])
             LL, _ = coeffs[0], coeffs[1]
             LL_wm = self.qim_embed(LL, watermark_channels[i])
