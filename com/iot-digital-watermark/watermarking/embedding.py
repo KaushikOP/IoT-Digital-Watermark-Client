@@ -27,9 +27,9 @@ class WatermarkEmbedding:
         """Save an image to the specified path."""
         result = cv2.imwrite(image_path, image)
         if result:
-            print("Media Saved")
+            print("Media " + image + " Saved at " + image_path)
         else:
-            print("error")
+            print("error while saving media " + image + " at " +image_path)
             exit()
     
     def fwt2(self, image):
