@@ -1,4 +1,10 @@
-# shared/constants.py
+#Params
+
+ALPHA = 0.049
+FWT_LEVELS = 3
+FWT_WAVELET = 'db3'
+
+# Directories
 
 DATA_DIR = '/home/pi/IoT-Digital-Watermark-Client/data/'
 HOST_MEDIA_DIR = DATA_DIR + 'host_media/'

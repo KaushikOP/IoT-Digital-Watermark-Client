@@ -88,7 +88,7 @@ class WatermarkEmbedding:
         start_time = time.time()
 
         # Load images
-        print("Loading the media file " + host_media_file + " and watermark " + watermark_file)
+        print("Loading the host media file " + host_media_file + " and watermark " + watermark_file)
         load_start = time.time()
         host_media = self.load_image(constants.HOST_MEDIA_DIR + host_media_file)
         watermark = self.load_image(constants.WATERMARK_DIR + watermark_file)
