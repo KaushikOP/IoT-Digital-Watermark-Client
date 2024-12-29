@@ -1,7 +1,7 @@
 #Params
 
 ALPHA = 0.049
-FWT_LEVELS = 3
+FWT_LEVELS = 2
 FWT_WAVELET = 'db3'
 
 # Directories
