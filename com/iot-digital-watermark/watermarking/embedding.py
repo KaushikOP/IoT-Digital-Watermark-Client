@@ -12,8 +12,8 @@ logging.basicConfig(level=logging.DEBUG)
 class WatermarkEmbedding:
     def __init__(self):
         # Initialize any variables
-        self.ALPHA = 0.049
-        self.FWT_LEVELS = 3
+        self.ALPHA = 0.1
+        self.FWT_LEVELS = 1
         self.FWT_WAVELET = 'db3'
 
     def load_image(self, image_path):
