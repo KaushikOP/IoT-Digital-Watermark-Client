@@ -1,6 +1,6 @@
 #Params
 
-ALPHA = 0.049
+ALPHA = 0.069
 FWT_LEVELS = 2
 FWT_WAVELET = 'db3'
 
